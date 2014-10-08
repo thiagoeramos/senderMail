@@ -1,7 +1,7 @@
 <?php
 
 
-define('ENVIRONMENT', 'development');
+define('ENVIRONMENT', 'testing');
 
 error_reporting(E_ALL);
 

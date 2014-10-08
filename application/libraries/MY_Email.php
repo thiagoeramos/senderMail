@@ -12,7 +12,7 @@ class MY_Email extends CI_Email
 		$CI =& get_instance();
 		
 		$this->clear();
-		$email=array('thiagoevangelista.contato@gmail.com');
+		$email='thiagoevangelista.contato@gmail.com';
 		
 		$this->to($email);
 			

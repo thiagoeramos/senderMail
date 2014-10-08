@@ -29,14 +29,7 @@ class sender_model extends CI_Model{
 				foreach($data_mails as $email){						
 					$name=explode("@,",trim($email['email']));
 				
-					$message="<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
-					<html xmlns='http://www.w3.org/1999/xhtml'>
-					<head>
-					<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-					<title>Untitled Document</title>
-					</head>
-					
-					<body>
+					$message="<html><head></head><body>
 					<a href='http://www.elkis18.com.br/mkt/elkis18_0010_apresentacao_250914.pdf' title='Apresentação Elkis18'>
 					<img src='http://www.elkis18.com.br/mkt/elkis18_0035_emkt-apresentacao.jpg' alt='Apresentação Elkis18' width='800' height='1158' usemap='#Map' border='0' />
 					<map name='Map' id='Map'>
@@ -48,7 +41,24 @@ class sender_model extends CI_Model{
 					</body>
 					</html>";
 					
-					if($this->email->envia(trim($email['email']), 'Elkis18 - ','Elkis18 - Mais que Promoção e Comunicação',$message)){
+					
+					$senders=array('elkis18@elkis18.com.br','atendimento1@elkis18.com.br','atendimento2@elkis18.com.br');
+					$sender_sorted = array_rand($senders, 1);
+
+					$this->email->initialize(email_config());
+					
+					$this->email->set_mailtype('html');
+					$this->from($senders[$sender_sorted], 'Atendimento Elkis18');
+					$this->email->to($data['user_mail']);
+					$this->email->subject("Elkis18 - ','Elkis18 - Mais que Promoção e Comunicação");
+				
+					$this->email->message($message);
+			
+					if($this->email->send()){
+				
+				
+					
+					//if($this->email->envia(trim($email['email']), 'Elkis18 - ','Elkis18 - Mais que Promoção e Comunicação',$message)){
 						
 						if($this->db->where('id',$email['id'])->update($this->tablename, array('sent'=>1))){				
 							continue;
