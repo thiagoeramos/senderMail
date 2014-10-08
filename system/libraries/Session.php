@@ -577,14 +577,16 @@ class CI_Session {
 	function _flashdata_mark()
 	{
 		$userdata = $this->all_userdata();
-		foreach ($userdata as $name => $value)
-		{
-			$parts = explode(':new:', $name);
-			if (is_array($parts) && count($parts) === 2)
+		if($userdata){
+			foreach ($userdata as $name => $value)
 			{
-				$new_name = $this->flashdata_key.':old:'.$parts[1];
-				$this->set_userdata($new_name, $value);
-				$this->unset_userdata($name);
+				$parts = explode(':new:', $name);
+				if (is_array($parts) && count($parts) === 2)
+				{
+					$new_name = $this->flashdata_key.':old:'.$parts[1];
+					$this->set_userdata($new_name, $value);
+					$this->unset_userdata($name);
+				}
 			}
 		}
 	}
@@ -601,12 +603,14 @@ class CI_Session {
 	function _flashdata_sweep()
 	{
 		$userdata = $this->all_userdata();
+		if($userdata){
 		foreach ($userdata as $key => $value)
 		{
 			if (strpos($key, ':old:'))
 			{
 				$this->unset_userdata($key);
 			}
+		}
 		}
 
 	}

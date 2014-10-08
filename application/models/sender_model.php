@@ -15,19 +15,25 @@ class sender_model extends CI_Model{
 	public final function sendMail()
 	{
 		
-			$this->db->select("*");
+		
 			$this->db->from($this->tablename);
-			$this->db->where(array('sent'=>0,'status_id'=>1));
-			$this->db->limit(100);
-			$query=$this->db->get();
+	
+			$this->db->where(array('sent'=>'0','status_id'=>'1'));
 			
-			if($query->num_rows()){
+			$this->db->limit(100);
+	
+			//echo $this->db->last_query(); die();
+			
+			$query = $this->db->get();
+		
+			if($query->num_rows() > 0)
+			{
+				$data_mails= $query->result_array();
+				$senders=array('elkis18@elkis18.com.br','atendimento1@elkis18.com.br','atendimento2@elkis18.com.br');
 				
-				$data_mails=$query->result_array();
-				$emails=array();
+				foreach($data_mails as $email){					
 				
-				foreach($data_mails as $email){						
-					$name=explode("@,",trim($email['email']));
+					$name=explode("@",trim($email['email']));
 				
 					$message="<html><head></head><body>
 					<a href='http://www.elkis18.com.br/mkt/elkis18_0010_apresentacao_250914.pdf' title='Apresentação Elkis18'>
@@ -40,26 +46,23 @@ class sender_model extends CI_Model{
 					<p>Olá ".$name[0]."! Caso você não queira mais receber esses e-mails favor responder ao remetente.</p>
 					</body>
 					</html>";
-					
-					
-					$senders=array('elkis18@elkis18.com.br','atendimento1@elkis18.com.br','atendimento2@elkis18.com.br');
+										
+				
 					$sender_sorted = array_rand($senders, 1);
 
 					$this->email->initialize(email_config());
 					
 					$this->email->set_mailtype('html');
-					$this->from($senders[$sender_sorted], 'Atendimento Elkis18');
-					$this->email->to($data['user_mail']);
-					$this->email->subject("Elkis18 - ','Elkis18 - Mais que Promoção e Comunicação");
+					$this->email->from($senders[$sender_sorted]);
+								
+					$this->email->to(trim($email['email']));
+							//$this->email->to('thiagoevangelista.contato@gmail.com');
 				
+					$this->email->subject("Elkis18");
+			
 					$this->email->message($message);
 			
-					if($this->email->send()){
-				
-				
-					
-					//if($this->email->envia(trim($email['email']), 'Elkis18 - ','Elkis18 - Mais que Promoção e Comunicação',$message)){
-						
+					if($this->email->send()){						
 						if($this->db->where('id',$email['id'])->update($this->tablename, array('sent'=>1))){				
 							continue;
 						}
