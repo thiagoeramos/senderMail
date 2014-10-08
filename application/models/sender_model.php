@@ -58,7 +58,7 @@ class sender_model extends CI_Model{
 					$this->email->to(trim($email['email']));
 							//$this->email->to('thiagoevangelista.contato@gmail.com');
 				
-					$this->email->subject("Elkis18");
+					$this->email->subject("Elkis18 - Muito Mais que Promoção");
 			
 					$this->email->message($message);
 			
