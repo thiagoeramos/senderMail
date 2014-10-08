@@ -15,11 +15,21 @@ class cronjob extends CI_Controller {
 		$this->data = array();
     }
 
+	public final function render($method)
+	{
+		
+		$this->load->view('common/topo', $this->data);
+		$this->load->view($this->router->class.'/'.$method, $this->data);
+		$this->load->view('common/rodape', $this->data);
+	}
+	
 	
     public final function index()
     {
 
       $this->dm->sendMail();
+	  
+	$this->render($this->router->method);
 
     }
 	
