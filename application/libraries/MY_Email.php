@@ -11,10 +11,9 @@ class MY_Email extends CI_Email
 	{
 		$CI =& get_instance();
 		
-		$CI->load->model('logbusca_model');
-		
 		$this->clear();
 		$email=array('thiagoevangelista.contato@gmail.com');
+		
 		$this->to($email);
 			
 		$senders=array('elkis18@elkis18.com.br','atendimento1@elkis18.com.br','atendimento2@elkis18.com.br');
