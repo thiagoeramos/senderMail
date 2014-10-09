@@ -18,7 +18,7 @@ class sender_model extends CI_Model{
 		
 			$this->db->from($this->tablename);
 	
-			$this->db->where(array('sent'=>'0','status_id'=>'1'));
+			$this->db->where(array('sent'=>'1','status_id'=>'1','id >='=>'10000'));
 			
 			$this->db->limit(500);
 	
