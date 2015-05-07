@@ -81,21 +81,7 @@ $db['testing']['swap_pre']      = '';
 $db['testing']['autoinit']      = TRUE;
 $db['testing']['stricton']      = FALSE;
 
-$db['production']['hostname']   = 'localhost';
-$db['production']['username']   = 'stodanon_sto';
-$db['production']['password']   = 'sto2345';
-$db['production']['database']   = 'stodanon_sto';
-$db['production']['dbdriver']   = 'mysql';
-$db['production']['dbprefix']   = '';
-$db['production']['pconnect']   = TRUE;
-$db['production']['db_debug']   = TRUE;
-$db['production']['cache_on']   = FALSE;
-$db['production']['cachedir']   = '';
-$db['production']['char_set']   = 'utf8';
-$db['production']['dbcollat']   = 'utf8_general_ci';
-$db['production']['swap_pre']   = '';
-$db['production']['autoinit']   = TRUE;
-$db['production']['stricton']   = FALSE;
+
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */
