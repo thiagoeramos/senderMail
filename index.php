@@ -32,7 +32,7 @@ error_reporting(E_ALL);
  * NO TRAILING SLASH!
  *
  */
-	$application_folder = 'application';
+	$application_folder = 'application' ;
 
 /*
  * --------------------------------------------------------------------
